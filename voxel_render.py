@@ -3,10 +3,15 @@ from numba import njit
 import numpy as np
 import color_creator
 import worley_noise
+
 import math
 
-noise_generate = worley_noise.WorleyNoise(20, 1024, 768)
+# noise_generate = worley_noise.WorleyNoise(20, 1024, 768)
+# height_map = noise_generate.get_worley_noise()
+noise_generate = worley_noise.WorleyNoiseSine(20, 1024, 768)
 height_map = noise_generate.get_worley_noise()
+
+
 # height_map = -(height_map-255)
 color_creator_1 = color_creator.ColorCreator(height_map)
 # color_map = color_creator_1.create_color_map()

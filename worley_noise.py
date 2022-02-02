@@ -1,7 +1,7 @@
 import numpy as np
 import time
 from numba import njit
-
+import matplotlib.pyplot as plt
 
 @njit(fastmath=True)
 def get_distance(point1, point2):
@@ -33,9 +33,10 @@ class WorleyNoise:
         self.vertex[:, 1] = self.vertex[:, 1] * height
         self.vertex = self.vertex.astype(int)
 
+
     def _map(self, value, start_old, end_old, start_new, end_new):
 
-        return value * ((end_new-start_new)/(end_old-start_old))
+        return start_new + value * ((end_new-start_new)/(end_old-start_old))
 
     def get_worley_noise(self):
 
@@ -50,3 +51,30 @@ class WorleyNoise:
 
         print(time.time() - start)
         return noise.astype('int32')
+
+
+class WorleyNoiseSine(WorleyNoise):
+    def get_worley_noise(self):
+
+        start = time.time()
+        distances = np.empty((self.field_width, self.field_height))
+        distances = smaller_distance_calculate(distances,
+                                               self.field_width,
+                                               self.field_height,
+                                               self.vertex)
+
+        noise = self._map(distances, 0, distances.max(), 0, np.pi)
+        print(time.time() - start)
+        noise = np.sin(noise)*255
+        print(time.time() - start)
+        #np.full((1024, 768), 255) -
+        return noise.astype('int32') -20
+
+# test_gen1 = WorleyNoise(20,1024,768)
+#
+# plt.imshow(test_gen1.get_worley_noise())
+
+# test_gen = WorleyNoiseSine(20, 1024, 768)
+#
+# plt.imshow(test_gen.get_worley_noise())
+# plt.show()
