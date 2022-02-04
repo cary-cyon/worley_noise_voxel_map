@@ -76,5 +76,6 @@ class WorleyNoiseSine(WorleyNoise):
 
 # test_gen = WorleyNoiseSine(20, 1024, 768)
 #
-# plt.imshow(test_gen.get_worley_noise())
+# image = plt.imshow(test_gen.get_worley_noise()).make_image([])
+# print(image[0].shape)
 # plt.show()

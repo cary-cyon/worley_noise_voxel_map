@@ -13,9 +13,9 @@ height_map = noise_generate.get_worley_noise()
 
 
 # height_map = -(height_map-255)
-color_creator_1 = color_creator.ColorCreator(height_map)
+color_creator_1 = color_creator.ColorCreationClass(height_map)
 # color_map = color_creator_1.create_color_map()
-color_map = height_map
+color_map = color_creator_1.create_color_map()
 
 
 

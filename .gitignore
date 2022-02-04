@@ -127,5 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-#not for stranger eys
+#not for stranger eyes
 perlin_noise.py
+matplottest.py
